@@ -1,6 +1,6 @@
 <template>
-  <div class="page" key="about">
-    <Pagination @currPage="goPage" :currPage="cpage" :totalPages="totalPages"></Pagination>
+  <div class="page">
+
   </div>
 </template>
 
@@ -8,8 +8,7 @@
 export default {
   data () {
     return {
-      cpage: 15,
-      totalPages: 20
+   
     }
   },
   created () {
@@ -22,14 +21,10 @@ export default {
 
   },
   methods: {
-    goPage (page) {
-      console.log(page)
-    }
+
   }
 }
 </script>
 
 <style scoped lang="scss">
-
 </style>
-

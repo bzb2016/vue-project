@@ -1,14 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Loading v-if="loading"></Loading>
+    <transition :name="'slide-' + (direction === 'forward'? 'left' : 'right')">
+      <router-view/>
+    </transition>
   </div>
 </template>
+<script>
+  import {mapState} from 'vuex'
+export default {
+  name: "App",
+  computed: {
+    ...mapState(['direction', 'loading'])
+  },
+}
+</script>
 
 <style lang="scss">
+html,body{
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #fff;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,5 +40,31 @@
       color: #42b983;
     }
   }
+}
+// 左右无缝移动切换页面
+  .slide-left-enter-active,
+  .slide-right-enter-active,
+  .slide-left-leave-active,
+  .slide-right-leave-active {
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transition: all 0.5s;
+    top: 0;
+    position: absolute;
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  .slide-left-enter,
+  .slide-right-leave-active {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+
+  .slide-left-leave-active,
+  .slide-right-enter {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
 }
 </style>
