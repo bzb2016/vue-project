@@ -32,6 +32,13 @@
         {{day}}
       </div>
     </section>
+    <!-- <div>
+      <AMap></AMap>
+    </div> -->
+    <div>
+      <button type="button" @click="showPasInput">显示密码框</button>
+    </div>
+    <PawInput :show="isShow" @close="closePasInput" @input="getPassword"></PawInput>
     <footer class="footer">
       <div class="foot">
         <input type="text">
@@ -41,7 +48,7 @@
 </template>
 
 <script>
-
+// import AMap from "AMap"
 export default {
   name: "HelloWorld",
   data () {
@@ -51,16 +58,31 @@ export default {
       day: null,
       hh: null,
       mm: null,
-      ss: null
+      ss: null,
+      isShow: false,
+      placeholder: '请输入密码'
     }
   },
   mounted () {
-    let time = '2018-11-4 22:10:10'
-    // let day = this.fn.getCountDownTime(time, 1, 3)
   },
   methods: {
+    showPasInput () {
+      this.isShow = true
+    },
+    closePasInput (bool) {
+      this.isShow = bool
+    },
+    getPassword (psw) {
+      console.log(psw)
+    },
     showAddress () {
       this.isShowAddress = true
+    },
+    handleInput (val) {
+      console.log(val)
+    },
+    handleFocus (val) {
+      console.log(val)
     },
     closeAddress (data) {
       this.isShowAddress = data
@@ -98,7 +120,7 @@ export default {
   }
   .content{
     width: 100%;
-    height: 13rem;
+    height: 5rem;
     border: 1px solid red;
     a{
       font-size: 50px;

@@ -148,6 +148,20 @@ const common = {
     } else {
       return time
     }
+  },
+  // 获取url字符串参数并转换为对象格式并返回
+  getParseQuery (url) {
+    if (!url) return
+    let queryJson = {}
+    if (url.includes('?')) {
+      let querystr = url.split('?')[1].split('#')[0]
+      let queryList = querystr.split('&')
+      for (let value of queryList.values()) {
+        let itemList = value.split('=')
+        queryJson[itemList[0]] = itemList[1]
+      }
+    }
+    return queryJson
   }
 }
 export default common
